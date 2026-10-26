@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>臨床學習紀錄 · 楊宗諺 · 北榮重粒子及放射腫瘤部</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #07090e;
+  --bg-elev: #0e131c;
+  --bg-card: #131a26;
+  --bg-card-2: #1a2230;
+  --border: #232c3d;
+  --border-soft: #1a212e;
+  --text: #e8edf5;
+  --text-soft: #b8c1d1;
+  --text-muted: #6e7a92;
+  --accent: #5eead4;        /* teal — medical clean */
+  --accent-2: #38bdf8;      /* sky */
+  --accent-glow: rgba(94, 234, 212, 0.18);
+  --warm: #fbbf24;          /* amber — particle/radiation */
+  --warm-soft: rgba(251, 191, 36, 0.12);
+  --danger: #f87171;
+  --danger-soft: rgba(248, 113, 113, 0.1);
+  --ok: #34d399;
+  --ok-soft: rgba(52, 211, 153, 0.1);
+  --violet: #a78bfa;
+  --violet-soft: rgba(167, 139, 250, 0.12);
+  --shadow-lg: 0 30px 80px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.02);
+  --serif: 'Noto Serif TC', 'Source Han Serif TC', serif;
+  --sans: 'Noto Sans TC', -apple-system, 'PingFang TC', sans-serif;
+  --mono: 'JetBrains Mono', 'SF Mono', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.85;
+  font-size: 16px;
+  letter-spacing: 0.015em;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(94, 234, 212, 0.06), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 100%, rgba(251, 191, 36, 0.04), transparent 60%);
+  pointer-events: none; z-index: 0;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--accent); text-decoration: none; }
+
+/* ========== HERO ========== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: center;
+  padding: 4rem 6vw;
+  gap: 5rem;
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 70% 30%, rgba(56, 189, 248, 0.12), transparent 40%),
+    radial-gradient(circle at 25% 70%, rgba(94, 234, 212, 0.08), transparent 45%);
+  z-index: 0;
+}
+.hero-grid-bg {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(94, 234, 212, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 234, 212, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%);
+  z-index: 0;
+}
+.hero-photo-wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+}
+.hero-photo {
+  position: relative;
+  width: 420px;
+  max-width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow:
+    0 50px 100px -20px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(94, 234, 212, 0.25),
+    0 0 80px -10px rgba(94, 234, 212, 0.25);
+  background: var(--bg-card);
+}
+.hero-photo::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(155deg, transparent 40%, rgba(7, 9, 14, 0.35) 100%);
+  pointer-events: none;
+}
+.hero-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.hero-photo-frame {
+  position: absolute;
+  inset: -14px;
+  border-radius: 32px;
+  border: 1px solid rgba(94, 234, 212, 0.15);
+  pointer-events: none;
+}
+.hero-photo-frame::before, .hero-photo-frame::after {
+  content: '';
+  position: absolute;
+  width: 28px; height: 28px;
+  border: 2px solid var(--accent);
+}
+.hero-photo-frame::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+.hero-photo-frame::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+.hero-content { position: relative; z-index: 1; }
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 1.8rem;
+  text-transform: uppercase;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 32px; height: 1px;
+  background: var(--accent);
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 4.4vw, 4rem);
+  line-height: 1.15;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #b8c1d1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-title .gradient-accent {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-soft);
+  margin-bottom: 2.5rem;
+  max-width: 540px;
+}
+.hero-meta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.4rem 2.5rem;
+  padding: 1.8rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem;
+  max-width: 580px;
+}
+.meta-item .meta-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.meta-item .meta-value {
+  font-size: 1.02rem;
+  color: var(--text);
+  font-weight: 500;
+}
+.meta-item .meta-value strong { color: var(--accent); font-weight: 700; }
+
+.hero-scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.hero-scroll-line {
+  width: 50px; height: 1px;
+  background: linear-gradient(90deg, var(--text-muted), transparent);
+}
+
+/* ========== STATS BAR ========== */
+.stats {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.stat {
+  background: var(--bg);
+  padding: 2.4rem 2rem;
+  text-align: center;
+  position: relative;
+}
+.stat-num {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.stat-unit {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ========== LAYOUT ========== */
+.layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 6vw;
+}
+.toc {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  padding: 5rem 2rem 5rem 0;
+  border-right: 1px solid var(--border-soft);
+  overflow-y: auto;
+}
+.toc-title {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.toc-list { list-style: none; }
+.toc-list li { margin-bottom: 0.2rem; }
+.toc-list a {
+  display: block;
+  padding: 0.55rem 0.9rem;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  border-left: 2px solid transparent;
+  transition: all 0.2s ease;
+  line-height: 1.5;
+}
+.toc-list a:hover {
+  color: var(--text);
+  background: rgba(94, 234, 212, 0.04);
+  border-left-color: rgba(94, 234, 212, 0.3);
+}
+.toc-list a.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  background: rgba(94, 234, 212, 0.06);
+}
+.toc-list .toc-sub a {
+  padding-left: 1.8rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+/* ========== MAIN CONTENT ========== */
+main {
+  padding: 5rem 0 5rem 4rem;
+  max-width: 880px;
+}
+.section {
+  padding: 3rem 0 5rem;
+  scroll-margin-top: 2rem;
+}
+.section + .section { border-top: 1px solid var(--border-soft); }
+.section-head { margin-bottom: 3rem; }
+.section-num {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.section-num::before {
+  content: ''; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 3.3vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+.section-context {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  font-family: var(--mono);
+}
+.section-context .ctx-tag {
+  background: var(--bg-card);
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+}
+
+h3.sub {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 3rem 0 1.2rem;
+  color: var(--text);
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+}
+h3.sub::before {
+  content: attr(data-num);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+h4.sub-sub {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1.8rem 0 0.8rem;
+  color: var(--accent);
+}
+
+p { margin-bottom: 1.2rem; color: var(--text-soft); }
+p.lead {
+  font-size: 1.08rem;
+  color: var(--text);
+  margin-bottom: 1.8rem;
+}
+strong { color: var(--text); font-weight: 600; }
+em.term {
+  font-style: normal;
+  color: var(--accent);
+  font-weight: 500;
+  font-family: var(--mono);
+  font-size: 0.94em;
+  padding: 0 0.15em;
+}
+em.warn-term {
+  font-style: normal;
+  color: var(--warm);
+  font-weight: 500;
+}
+
+/* Image grid */
+.img-row {
+  display: grid;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.img-row.cols-2 { grid-template-columns: 1fr 1fr; }
+.img-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.img-row figure {
+  margin: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.img-row figure:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+}
+.img-row figure img {
+  width: 100%; aspect-ratio: 4/3;
+  object-fit: cover;
+}
+.img-row figure figcaption {
+  padding: 0.7rem 1rem 0.9rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-soft);
+  line-height: 1.5;
+}
+figure.solo {
+  margin: 2.5rem 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+figure.solo img { width: 100%; }
+figure.solo figcaption {
+  padding: 0.9rem 1.2rem 1.1rem;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-soft);
+}
+
+/* Case cards */
+.case-card {
+  background: linear-gradient(160deg, var(--bg-card) 0%, var(--bg-card-2) 100%);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 2rem 2.2rem;
+  margin: 2rem 0;
+  position: relative;
+  overflow: hidden;
+}
+.case-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+.case-card-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+  flex-wrap: wrap;
+}
+.case-tag {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(94, 234, 212, 0.08);
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  border: 1px solid rgba(94, 234, 212, 0.2);
+}
+.case-title {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+}
+.case-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.6rem 1.4rem;
+  padding: 1rem 0;
+  margin: 1rem 0;
+  border-top: 1px dashed var(--border);
+  border-bottom: 1px dashed var(--border);
+  font-size: 0.86rem;
+}
+.case-meta dt {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+.case-meta dd { color: var(--text); font-weight: 500; }
+
+/* Key box (highlights) */
+.keybox {
+  background: var(--bg-card);
+  border-left: 3px solid var(--accent);
+  padding: 1.2rem 1.6rem;
+  margin: 1.5rem 0;
+  border-radius: 0 12px 12px 0;
+}
+.keybox.warn { border-left-color: var(--warm); }
+.keybox.danger { border-left-color: var(--danger); }
+.keybox.violet { border-left-color: var(--violet); }
+.keybox-title {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+.keybox.warn .keybox-title { color: var(--warm); }
+.keybox.danger .keybox-title { color: var(--danger); }
+.keybox.violet .keybox-title { color: var(--violet); }
+.keybox p:last-child { margin-bottom: 0; }
+.keybox p { color: var(--text); font-size: 0.96rem; }
+
+/* Timeline (treatment sequence) */
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.5rem;
+  margin: 2rem 0;
+  padding: 1.6rem;
+  background: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
+.flow-step {
+  flex: 1 1 110px;
+  padding: 1rem 0.9rem;
+  background: var(--bg-elev);
+  border-radius: 10px;
+  border: 1px solid var(--border-soft);
+  font-size: 0.86rem;
+  text-align: center;
+  color: var(--text);
+  position: relative;
+}
+.flow-step.blood { border-color: rgba(248, 113, 113, 0.3); color: var(--danger); }
+.flow-step.tx { border-color: rgba(94, 234, 212, 0.3); color: var(--accent); }
+.flow-step.drug { border-color: rgba(251, 191, 36, 0.3); color: var(--warm); }
+.flow-arrow {
+  align-self: center;
+  color: var(--text-muted);
+  font-family: var(--mono);
+  font-weight: 700;
+}
+
+/* Two-col compare */
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.compare-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+}
+.compare-card h5 {
+  font-size: 0.78rem;
+  font-family: var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  color: var(--text-muted);
+}
+.compare-card.old h5 { color: var(--text-muted); }
+.compare-card.new h5 { color: var(--accent); }
+.compare-card p { font-size: 0.94rem; margin-bottom: 0.6rem; }
+.compare-card p:last-child { margin-bottom: 0; }
+
+/* MRI sequence cards */
+.seq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.seq-card {
+  background: linear-gradient(165deg, var(--bg-card), var(--bg-card-2));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+  position: relative;
+}
+.seq-card-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  margin-bottom: 0.7rem;
+}
+.seq-card h5 {
+  font-size: 0.94rem;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+}
+.seq-card p { font-size: 0.86rem; margin-bottom: 0; color: var(--text-soft); }
+
+/* Foramen list */
+.foramen-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.7rem;
+  margin: 1.5rem 0;
+}
+.foramen-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1.2rem;
+  padding: 1rem 1.4rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  align-items: start;
+}
+.foramen-item .latin {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--accent);
+  font-size: 0.98rem;
+}
+.foramen-item .desc { font-size: 0.9rem; color: var(--text-soft); }
+
+/* Numeric callouts */
+.callouts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.callout {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.4rem 1.4rem 1.2rem;
+  text-align: center;
+}
+.callout-num {
+  font-family: var(--serif);
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.35rem;
+}
+.callout-num.warm {
+  background: linear-gradient(135deg, var(--warm), #f59e0b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.callout-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.callout-desc {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+/* List */
+ol.styled, ul.styled {
+  margin: 1.2rem 0 1.5rem 0;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: item;
+}
+ol.styled li, ul.styled li {
+  padding: 0.5rem 0 0.5rem 2.4rem;
+  position: relative;
+  color: var(--text-soft);
+  margin-bottom: 0.4rem;
+}
+ol.styled li::before {
+  counter-increment: item;
+  content: counter(item, decimal-leading-zero);
+  position: absolute;
+  left: 0; top: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(94, 234, 212, 0.08);
+  width: 1.8rem; height: 1.8rem;
+  border-radius: 6px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(94, 234, 212, 0.18);
+}
+ul.styled li::before {
+  content: '▸';
+  position: absolute;
+  left: 0.6rem; top: 0.5rem;
+  color: var(--accent);
+}
+
+/* Equation block */
+.equation {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.4rem 1.6rem;
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  color: var(--accent);
+  margin: 1.5rem 0;
+  text-align: center;
+  letter-spacing: 0.05em;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+}
+.equation .eq-label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+/* SIB table */
+.sib-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  background: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  font-size: 0.92rem;
+}
+.sib-table th, .sib-table td {
+  padding: 0.8rem 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-soft);
+}
+.sib-table th {
+  background: var(--bg-elev);
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.sib-table tr:last-child td { border-bottom: none; }
+.sib-table td.risk-high { color: var(--danger); font-weight: 600; }
+.sib-table td.risk-mid { color: var(--warm); font-weight: 600; }
+.sib-table td.risk-low { color: var(--ok); font-weight: 600; }
+.sib-table td.dose { font-family: var(--mono); color: var(--accent); font-weight: 600; }
+
+/* Footer */
+footer {
+  position: relative;
+  z-index: 1;
+  padding: 4rem 6vw;
+  text-align: center;
+  border-top: 1px solid var(--border-soft);
+  margin-top: 4rem;
+}
+footer p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+}
+footer .footer-tag {
+  font-family: var(--mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .layout { grid-template-columns: 1fr; }
+  .toc { display: none; }
+  main { padding: 3rem 0; }
+}
+@media (max-width: 800px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 3rem 6vw;
+    gap: 2.5rem;
+    text-align: center;
+  }
+  .hero-photo { width: 280px; }
+  .hero-meta { margin: 0 auto 2rem; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .img-row.cols-2, .img-row.cols-3 { grid-template-columns: 1fr; }
+  .compare { grid-template-columns: 1fr; }
+  .foramen-item { grid-template-columns: 1fr; gap: 0.4rem; }
+}
+
+/* Print */
+@media print {
+  :root {
+    --bg: #fff; --bg-elev: #f5f5f5; --bg-card: #f5f5f5; --bg-card-2: #fafafa;
+    --text: #000; --text-soft: #222; --text-muted: #555;
+    --border: #ddd; --border-soft: #eee;
+    --accent: #047857; --accent-2: #0369a1; --warm: #d97706;
+  }
+  body::before, .hero::before, .hero-grid-bg { display: none; }
+  .toc { display: none; }
+  .layout { grid-template-columns: 1fr; }
+  main { padding: 1rem 0; max-width: 100%; }
+  .hero { min-height: auto; page-break-after: always; }
+  .section { page-break-inside: avoid; }
+}
+
+/* Subtle fade-in */
+@media (prefers-reduced-motion: no-preference) {
+  .section { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .section.visible { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <div class="hero-grid-bg"></div>
+
+  <div class="hero-photo-wrap">
+    <div class="hero-photo">
+      <div class="hero-photo-frame"></div>
+      <img src="assets/yang_portrait.png" alt="楊宗諺實習肖像">
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Clinical Rotation · Radiation Oncology</div>
+    <h1 class="hero-title">
+      臨床學習紀錄<br>
+      <span class="gradient-accent">重粒子及放射腫瘤部</span>
+    </h1>
+    <p class="hero-subtitle">
+      硼中子捕獲治療（BNCT）、立體定位放射手術、Contouring 與 LQ Model 的兩週深度學習。
+      從中國附醫新竹分院到清大原子爐，再到 Gamma Knife 的劑量梯度藝術。
+    </p>
+
+    <dl class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-label">學員</div>
+        <div class="meta-value"><strong>楊宗諺</strong>　北醫醫學系 UGY</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">指導教師</div>
+        <div class="meta-value">吳元宏 VS · 胡育文 VS</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">實習機構</div>
+        <div class="meta-value">臺北榮民總醫院</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">期間</div>
+        <div class="meta-value">2026-05-11 → 2026-05-22</div>
+      </div>
+    </dl>
+
+    <div class="hero-scroll">
+      <span class="hero-scroll-line"></span>
+      Scroll to begin
+    </div>
+  </div>
+</header>
+
+<!-- ========== STATS ========== -->
+<section class="stats">
+  <div class="stat">
+    <div class="stat-num">2</div>
+    <div class="stat-unit">Weeks · 兩週</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">5</div>
+    <div class="stat-unit">Modalities · 治療技術</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">3+</div>
+    <div class="stat-unit">VS Mentors · 主治</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">∞</div>
+    <div class="stat-unit">Take-aways · 收穫</div>
+  </div>
+</section>
+
+<!-- ========== LAYOUT ========== -->
+<div class="layout">
+
+  <!-- TOC -->
+  <aside class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <ul class="toc-list">
+      <li><a href="#bnct-1">01 · BNCT 中國附醫</a></li>
+      <li><a href="#bnct-2">02 · BNCT 清大原子爐</a></li>
+      <li><a href="#ct-sim">03 · CT Simulation</a></li>
+      <li><a href="#contouring">04 · Contouring & RT 策略</a></li>
+      <li><a href="#hu-1">05 · GTV / CTV / PTV / ITV</a></li>
+      <li><a href="#breathing">06 · 呼吸運動管理</a></li>
+      <li><a href="#npc">07 · 鼻咽癌 Contouring</a></li>
+      <li><a href="#neck">08 · 頸部 LN 分區</a></li>
+      <li><a href="#lq">09 · LQ Model & SIB</a></li>
+      <li><a href="#gamma">10 · Gamma Knife</a></li>
+      <li><a href="#closing">11 · 結業合影</a></li>
+    </ul>
+  </aside>
+
+  <main>
+
+    <!-- 01 BNCT 中國附醫 -->
+    <section class="section" id="bnct-1">
+      <div class="section-head">
+        <div class="section-num">Section 01 · Boron Neutron Capture Therapy</div>
+        <h2 class="section-title">BNCT — 二元治療的細胞級精準消融</h2>
+        <div class="section-context">
+          <span class="ctx-tag">2026-05-12</span>
+          <span class="ctx-tag">中國附醫新竹分院</span>
+          <span class="ctx-tag">吳元宏 醫師</span>
+        </div>
+      </div>
+
+      <div class="img-row cols-3">
+        <figure><img src="assets/yang_at_heron.png" alt="禾榮 BNCT 中心"><figcaption>禾榮（HE·RON）硼中子捕獲治療中心入口合影</figcaption></figure>
+        <figure><img src="assets/bnct_workflow_board.png" alt="BNCT 流程圖"><figcaption>中心展示的 BNCT 治療流程示意</figcaption></figure>
+        <figure><img src="assets/bnct_logo_board.png" alt="BNCT logo"><figcaption>BNCT 二元治療概念圖（硼藥 + 中子束）</figcaption></figure>
+      </div>
+
+      <h3 class="sub" data-num="01">臨床適應症選擇</h3>
+      <p>在臨床應用上，<em class="term">硼中子捕獲治療（BNCT）</em>因其二元治療（含硼藥物 + 中子束）帶來的細胞級精準消融特性，被視為一種比碳離子更為精準的「超重粒子治療」。根據老師臨床經驗與台灣癌症聯合會（TJCC）相關文獻，BNCT 對下列局部腫瘤表現顯著治療優勢：</p>
+
+      <ul class="styled">
+        <li><strong>Melanoma</strong>（本次實際觀摩之案例：雷女士）</li>
+        <li><strong>Sarcoma</strong></li>
+        <li><strong>Meningioma</strong></li>
+        <li><strong>眼睛局部腫瘤</strong></li>
+      </ul>
+
+      <div class="keybox warn">
+        <div class="keybox-title">Caveat · 並非萬靈丹</div>
+        <p>因其局部精準治療的本質，並<strong>不適合用於第 4 期已發生晚期全身轉移</strong>的癌症患者。目前新竹中國附醫與禾榮科技合作，已成為台灣推動 ABNCT 的重要基地，並針對符合條件的特定重症患者提供恩慈療法申請管道。</p>
+      </div>
+
+      <h3 class="sub" data-num="02">治療時序流程與關鍵生理參數</h3>
+      <p>BNCT 的標準臨床操作流程具備高度的動態性與時效嚴謹性。病患在治療當日的標準時序：</p>
+
+      <div class="flow">
+        <div class="flow-step blood">抽血 #1</div><span class="flow-arrow">→</span>
+        <div class="flow-step drug">注射 BPA</div><span class="flow-arrow">→</span>
+        <div class="flow-step blood">+1h 抽血</div><span class="flow-arrow">→</span>
+        <div class="flow-step tx">第一階段中子束</div><span class="flow-arrow">→</span>
+        <div class="flow-step blood">+2h 抽血</div><span class="flow-arrow">→</span>
+        <div class="flow-step tx">第二階段中子束</div><span class="flow-arrow">→</span>
+        <div class="flow-step blood">收尾抽血</div>
+      </div>
+
+      <div class="callouts">
+        <div class="callout">
+          <div class="callout-num">3.0 / 2.5</div>
+          <div class="callout-label">T/N Ratio</div>
+          <div class="callout-desc">臨床實務常直接以預設值帶入計算</div>
+        </div>
+        <div class="callout">
+          <div class="callout-num warm">Boron-10</div>
+          <div class="callout-label">Real Driver</div>
+          <div class="callout-desc">血中實際濃度決定中子物理劑量</div>
+        </div>
+        <div class="callout">
+          <div class="callout-num">?</div>
+          <div class="callout-label">Cut-off Point</div>
+          <div class="callout-desc">硼濃度多高才最佳，尚無定論</div>
+        </div>
+      </div>
+
+      <p>T/N ratio 主要用途在於推測患者預後與治療效果，並不直接影響實際 Treatment regimen 的擬定。真正核心是血中 <em class="term">Boron-10</em> 實際濃度，與治療效果呈正相關。</p>
+
+      <h3 class="sub" data-num="03">物理限制與 NCEPT 前沿技術</h3>
+      <p>儘管 BNCT 具備細胞尺度精準度，但其最大物理限制在於<strong>治療深度不足</strong>。中子不具備 <em class="term">Bragg peak</em>，深部腫瘤照射時會對表淺正常組織造成累積性傷害。</p>
+
+      <div class="callouts">
+        <div class="callout">
+          <div class="callout-num">2-5 cm</div>
+          <div class="callout-label">Sweet Spot</div>
+          <div class="callout-desc">最合適治療深度</div>
+        </div>
+        <div class="callout">
+          <div class="callout-num warm">7-8 cm</div>
+          <div class="callout-label">Physical Limit</div>
+          <div class="callout-desc">物理極限約於此</div>
+        </div>
+      </div>
+
+      <div class="keybox violet">
+        <div class="keybox-title">Frontier · NCEPT</div>
+        <p><em class="term">Neutron Capture Enhanced Particle Therapy</em>：將傳統放射源（中子）更換為具優異深度劑量分布的 Proton 或 Carbon ion。但質子／碳離子撞擊誘發之「中子通量」可能遠不如直接使用中子源，是否會削弱腫瘤內硼核分裂療效，仍是該技術急需克服的隱憂。</p>
+      </div>
+
+      <h3 class="sub" data-num="04">臨床不良反應與護理</h3>
+      <div class="compare">
+        <div class="compare-card old">
+          <h5>Radiation Dermatitis</h5>
+          <p>因中子穿透淺層組織之特性，<strong>發生率極高</strong>，臨床表現多類似 Grade 1-2 Skin burn。</p>
+          <p>護理：<em class="term">3M Cavilon</em> 噴霧進行皮膚屏障保護。</p>
+        </div>
+        <div class="compare-card new">
+          <h5>Hematuria (BPA Reaction)</h5>
+          <p>患者注射含硼藥物（BPA）後，約有 <strong>1%</strong> 機率出現短暫血尿。</p>
+          <p>臨床上需予以留意與監測。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 BNCT 清大 -->
+    <section class="section" id="bnct-2">
+      <div class="section-head">
+        <div class="section-num">Section 02 · Three Cases @ THOR Reactor</div>
+        <h2 class="section-title">BNCT 清大原子爐 — 跨足胸腔的歷史性一步</h2>
+        <div class="section-context">
+          <span class="ctx-tag">2026-05-15</span>
+          <span class="ctx-tag">清大 THOR 原子爐</span>
+          <span class="ctx-tag">陳一瑋 主任</span>
+        </div>
+      </div>
+
+      <p class="lead">過去 BNCT 臨床應用幾乎完全局限於「頸部以上」的頭頸癌或腦癌治療。本次觀摩的三例個案，標誌著該技術正式跨足「頭頸以下及胸腔病灶」的新里程碑。</p>
+
+      <div class="img-row cols-2">
+        <figure><img src="assets/yang_at_thor_control.png" alt="清大原子爐控制室"><figcaption>陳一瑋主任於 THOR 控制室合影</figcaption></figure>
+        <figure><img src="assets/bnct_beam_apparatus.png" alt="BNCT 治療射束裝置"><figcaption>BNCT 治療射束裝置一隅</figcaption></figure>
+      </div>
+
+      <!-- Case 1 -->
+      <div class="case-card">
+        <div class="case-card-head">
+          <span class="case-tag">Case 01</span>
+          <h3 class="case-title">深處 Glioblastoma Multiforme — 高風險抉擇</h3>
+        </div>
+        <dl class="case-meta">
+          <div><dt>Patient</dt><dd>林先生 · 65 歲男性</dd></div>
+          <div><dt>Diagnosis</dt><dd>GBM + Primary Lung Cancer</dd></div>
+          <div><dt>T/N Ratio (Lt Temporal)</dt><dd>10.17（Axumin PET）</dd></div>
+          <div><dt>KPS</dt><dd>50 / 意識不清</dd></div>
+        </dl>
+        <p>此個案在臨床處置上面臨極大挑戰：腫瘤位於深處，照射過程中若發生身體移動可能被迫直接終止治療。儘管已預防性給予 <em class="term">Steroids</em> 與 <em class="term">Avastin</em> 控制，但 BNCT 引發的急性 <em class="warn-term">IICP</em> 與 <em class="warn-term">Brain edema</em> 仍具高度不可預期性。家屬態度依舊非常積極，強烈爭取治療機會。</p>
+      </div>
+
+      <!-- Case 2 -->
+      <div class="case-card">
+        <div class="case-card-head">
+          <span class="case-tag">Case 02</span>
+          <h3 class="case-title">Scalp Fibrosarcoma 侵犯顱內 — 二次加強治療</h3>
+        </div>
+        <dl class="case-meta">
+          <div><dt>Patient</dt><dd>于先生</dd></div>
+          <div><dt>Diagnosis</dt><dd>Fibrosarcoma of Scalp</dd></div>
+          <div><dt>Prior BNCT</dt><dd>2 月 11 日（右側病灶）</dd></div>
+          <div><dt>Today's Target</dt><dd>左側殘餘 + 復發</dd></div>
+        </dl>
+        <p>相較於前述腦癌個案，本個案解剖位置相對表淺，<strong>利於中子劑量的堆疊</strong>；更重要的是，病患本身配合度極高，大幅降低術中移動而導致治療中斷的風險。</p>
+      </div>
+
+      <!-- Case 3 -->
+      <div class="case-card">
+        <div class="case-card-head">
+          <span class="case-tag">Case 03</span>
+          <h3 class="case-title">第四期乳癌全身轉移 — 多病灶劑量調配</h3>
+        </div>
+        <dl class="case-meta">
+          <div><dt>Patient</dt><dd>王女士</dd></div>
+          <div><dt>Diagnosis</dt><dd>Stage IV Breast Cancer w/ Multiple Mets</dd></div>
+          <div><dt>Latest PET</dt><dd>2026-04-02</dd></div>
+          <div><dt>Targets</dt><dd>Lt Breast · Lt Axillary LN · Mediastinal LN</dd></div>
+        </dl>
+        <p>醫療團隊將主要標靶鎖定在「左乳癌」與「左側腋下淋巴結」直接照射；至於位置較深的縱隔腔淋巴結，物理師採取創新思維：策略上<strong>不刻意單獨瞄準</strong>，而是利用前述兩個主要病灶照射時延伸擴散的 <em class="term">Scatter / Residual dose</em> 順帶治療。</p>
+      </div>
+
+      <h3 class="sub" data-num="01">乳癌作為 BNCT 新適應症的學理基礎</h3>
+      <p>乳癌生物學上屬於高度 <em class="term">Heterogeneous tumor</em>，傳統全身性化學治療或標靶藥物效果有限。特別是針對預後極差且缺乏有效標靶的 <strong>Triple-negative</strong> 病患，臨床上藥物選擇極度稀少。BNCT 利用細胞尺度進行重粒子捕捉的標靶放射治療，或許能精準摧毀腫瘤細胞而不受限於全身性藥物的耐藥性。</p>
+
+      <h3 class="sub" data-num="02">胸腔治療的物理學博弈</h3>
+      <div class="compare">
+        <div class="compare-card old">
+          <h5>傳統 Photon Therapy</h5>
+          <p>治療左側乳癌時，光子線極易波及後方心臟組織。</p>
+          <p>必須精準設限，避免射線導致 <em class="term">LAD</em> 硬化，造成長期心血管副作用。</p>
+        </div>
+        <div class="compare-card new">
+          <h5>BNCT 進軍胸腔</h5>
+          <p><strong>國際數據真空</strong> — 完全沒有 BNCT 中子束對胸腔關鍵器官（心臟、血管、肺部）輻射劑量影響與組織耐受度的歷史數據。</p>
+          <p>本次治療計劃劑量為未來建立指引<strong>開創了第一步</strong>。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 CT Simulation -->
+    <section class="section" id="ct-sim">
+      <div class="section-head">
+        <div class="section-num">Section 03 · CT Simulation</div>
+        <h2 class="section-title">CT 模擬定位 — 以病人為中心的臨床應變</h2>
+        <div class="section-context">
+          <span class="ctx-tag">2026-05-14</span>
+          <span class="ctx-tag">吳曉萍 放射師</span>
+        </div>
+      </div>
+
+      <p>在放射治療整體流程中，<strong>CT 模擬定位是至關重要的一環</strong>，其核心目的在於精準模擬並固定病人實際接受放射治療時的正確姿勢。在臨床實務中，定位姿勢的設計與病人的安全舒適之間必須取得平衡。</p>
+
+      <h3 class="sub" data-num="01">個案應變的三種典型</h3>
+
+      <div class="case-card">
+        <div class="case-card-head">
+          <span class="case-tag">Pall RT</span>
+          <h3 class="case-title">RCC Spine Mets — 姑息治療不做固定模具</h3>
+        </div>
+        <p>因病情嚴重已無法坐立，考量到此次放療屬於姑息性 Palliative RT，在兼顧患者舒適度與時效性的原則下，團隊決定不另外製作固定模具。</p>
+      </div>
+
+      <div class="case-card">
+        <div class="case-card-head">
+          <span class="case-tag">Brain CA</span>
+          <h3 class="case-title">熱塑型面具製作中躁動 — 情緒安撫</h3>
+        </div>
+        <p>急需放射治療的腦癌病患，在製作熱塑型面具的過程中出現躁動不安現象，醫療團隊不得不先中斷定位流程，並由家屬（丈夫）在旁陪伴安撫。<strong>突顯情緒安撫與病人安全同樣重要。</strong></p>
+      </div>
+
+      <div class="case-card">
+        <div class="case-card-head">
+          <span class="case-tag">Sarcoma</span>
+          <h3 class="case-title">Lt Groin Synovial Sarcoma — 特殊擺位 + Contrast</h3>
+        </div>
+        <p>腫瘤生長在大腿內側且極為接近陰囊，定位時需<strong>特別將大腿外旋翻開</strong>以避開重要器官；同時需注射 Contrast 提高腫瘤與周邊組織對比度，使邊界更加清晰。</p>
+      </div>
+
+      <h3 class="sub" data-num="02">特殊醫材與呼吸調控</h3>
+
+      <div class="keybox">
+        <div class="keybox-title">4D-CT for Breast Cancer</div>
+        <p>術後放療常使用<em class="term">發泡固定模具（Alpha-Cradle）</em>穩定身體，並搭配 <em class="term">4D-CT</em>：在「吸氣」與「呼氣」兩 Phase 各掃描一張 CT。優先選用「吸氣時相」影像，因為吸氣時能有效拉開胸壁與心臟距離，給予物理師更高彈性的射線入射角度，<strong>顯著減少心臟毒性</strong>，避免造成不可逆的心臟纖維化。</p>
+      </div>
+
+      <div class="compare">
+        <div class="compare-card old">
+          <h5>鐵絲</h5>
+          <p>放置於體表上作為後續物理師製作治療計畫圖時的 <em class="term">Reference point</em>。</p>
+        </div>
+        <div class="compare-card new">
+          <h5>鉛塊（保留使用情境）</h5>
+          <p>多數已被 MLC 取代，但特殊情境仍用：</p>
+          <ul class="styled">
+            <li>Keloid 進行 Electron beam 治療</li>
+            <li>部分表淺乳癌治療</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Contouring -->
+    <section class="section" id="contouring">
+      <div class="section-head">
+        <div class="section-num">Section 04 · Contouring & Clinical Strategy</div>
+        <h2 class="section-title">Contouring 與器官保護 — 三軸臨床思維</h2>
+        <div class="section-context">
+          <span class="ctx-tag">2026-05-13</span>
+          <span class="ctx-tag">吳元宏 醫師</span>
+        </div>
+      </div>
+
+      <h3 class="sub" data-num="01">PTV Margin 的標準化規範</h3>
+
+      <div class="callouts">
+        <div class="callout">
+          <div class="callout-num">0.3 cm</div>
+          <div class="callout-label">Head & Neck</div>
+        </div>
+        <div class="callout">
+          <div class="callout-num">0.5 cm</div>
+          <div class="callout-label">Trunk</div>
+        </div>
+        <div class="callout">
+          <div class="callout-num warm">0 cm</div>
+          <div class="callout-label">Pall RT</div>
+          <div class="callout-desc">Spine/Brain 轉移病灶不擴張</div>
+        </div>
+      </div>
+
+      <p>若針對 <em class="term">Scalp SCC</em> 等皮膚表面腫瘤治療，為提高表面劑量，必須在 Simulation 階段先放置 <em class="term">Bolus</em>，以確保劑量釋放趨勢圖符合預期。</p>
+
+      <h3 class="sub" data-num="02">胸腔與上腹部：心肺毒性控制</h3>
+
+      <div class="keybox warn">
+        <div class="keybox-title">Pancreatic Cancer · 中空器官保護</div>
+        <p>胰臟鄰近多個中空器官，規劃時必須將<strong>大腸、小腸、肝臟、胃</strong>列為關鍵保護器官；必須嚴格限制這些空腔器官的受照劑量，以防止後期發生嚴重<em class="warn-term">穿孔或潰瘍併發症</em>。</p>
+      </div>
+
+      <div class="keybox">
+        <div class="keybox-title">NSCLC SBRT · 心臟次結構防護</div>
+        <p>針對早期（Stage I-II）NSCLC 進行 SBRT 時，必須特別留意心臟次結構的劑量防護。文獻（PubMed: 28476219）指出，LLL CA 病患在 SBRT 後，<em class="term">Heart substructures</em> 所接受的劑量與 <strong>Non-cancer death 具高度相關性</strong>。臨床勾畫時必須小心保護 SVC 與 LA 等高風險 substructure。</p>
+      </div>
+
+      <div class="keybox danger">
+        <div class="keybox-title">Drug-RT Interaction · 必停藥</div>
+        <p>若病患正服用標靶藥物 <em class="term">Osimertinib (Tagrisso)</em>，在放療開始前必須<strong>停藥至少 3 天</strong>，否則兩者併用將大幅提高 <em class="warn-term">Radiation Pneumonitis</em> 的發生機率。</p>
+      </div>
+
+      <h3 class="sub" data-num="03">CNS 腫瘤：多模態影像融合</h3>
+
+      <p>針對惡性度極高的 GBM，除常規影像外，臨床上可建議病人自費加做 <em class="term">Amino Acid PET Scan</em>，對精準定義腫瘤生物活性邊界有極大臨床輔助價值。</p>
+
+      <div class="keybox violet">
+        <div class="keybox-title">WBRT with Hippocampus Sparing</div>
+        <p>利用 <em class="term">T1 hypoenhancement</em> 影像特徵精確標記腦轉移病灶位置。為維護神經認知功能，臨床抓 <strong>0.5 cm margin</strong> 作為 Hippocampus Avoidance Zone；若未進行海馬迴保護，<strong>病患短期記憶力通常在放療後 4 個月內降至最低點</strong>，隨後才緩慢改善。</p>
+      </div>
+
+      <h4 class="sub-sub">Skull Base Meningioma — MRI 序列分工</h4>
+
+      <div class="seq-grid">
+        <div class="seq-card">
+          <span class="seq-card-tag">T2</span>
+          <h5>神經結構勾畫</h5>
+          <p>對神經結構顯像較清晰，主要勾畫 Optic Nerve、Chiasm、Optic Tract</p>
+        </div>
+        <div class="seq-card">
+          <span class="seq-card-tag">T1 + C</span>
+          <h5>血管結構</h5>
+          <p>觀看血管結構較清楚，精準勾畫 Internal Carotid Artery，避免劑量過高引發 Vascular Stenosis、缺血性中風或 Moyamoya Syndrome</p>
+        </div>
+        <div class="seq-card">
+          <span class="seq-card-tag">T1</span>
+          <h5>內分泌保護</h5>
+          <p>適合勾畫 Pituitary Gland 以保護內分泌功能</p>
+        </div>
+        <div class="seq-card">
+          <span class="seq-card-tag">DWI</span>
+          <h5>惡性度評估</h5>
+          <p>High Signal = 高細胞密度高惡性度；反之則臨床上可考慮適度降低治療劑量</p>
+        </div>
+      </div>
+
+      <div class="keybox">
+        <div class="keybox-title">擺位技巧 · 顱底腦膜瘤</div>
+        <p>先讓病患頭部往前 <em class="term">Flexion 15 度</em>。此動作旨在改變放射線束的入射角度，藉此有效減少 Lens 的暴露劑量，進而降低病患術後發生 <em class="warn-term">放射性白內障</em> 的風險。</p>
+      </div>
+    </section>
+
+    <!-- 05 GTV/CTV/PTV/ITV -->
+    <section class="section" id="hu-1">
+      <div class="section-head">
+        <div class="section-num">Section 05 · 05-19 課堂</div>
+        <h2 class="section-title">GTV / CTV / PTV / ITV — 精準放療的基石</h2>
+        <div class="section-context">
+          <span class="ctx-tag">2026-05-19</span>
+          <span class="ctx-tag">胡育文 醫師</span>
+        </div>
+      </div>
+
+      <div class="seq-grid">
+        <div class="seq-card">
+          <span class="seq-card-tag">GTV</span>
+          <h5>肉眼可見腫瘤體積</h5>
+          <p>透過肉眼或影像學（CT、MRI）能明確觀測到的主腫瘤範圍</p>
+        </div>
+        <div class="seq-card">
+          <span class="seq-card-tag">CTV</span>
+          <h5>+ 隱性微轉移</h5>
+          <p>主腫瘤 + 周邊可能延伸、肉眼不可見的 micro-metastasis；通常 GTV 再外擴 1-2 cm</p>
+        </div>
+        <div class="seq-card">
+          <span class="seq-card-tag">PTV</span>
+          <h5>放腫科專屬</h5>
+          <p>涵蓋每日 Setup error 等不確定性所衍生的外擴範圍</p>
+        </div>
+        <div class="seq-card">
+          <span class="seq-card-tag">ITV</span>
+          <h5>內部目標體積</h5>
+          <p>呼吸、器官蠕動引發的腫瘤位移範圍，獨立切分後 PTV 即可專注於擺位誤差</p>
+        </div>
+      </div>
+
+      <h3 class="sub" data-num="01">骨盆腔器官運動 — 攝護腺癌 vs 子宮頸癌</h3>
+
+      <div class="case-card">
+        <div class="case-card-head">
+          <span class="case-tag">Prostate</span>
+          <h3 class="case-title">攝護腺癌 — 硬橋與直腸氣球的物理學</h3>
+        </div>
+        <p>攝護腺位置非常容易受到前方膀胱尿液累積、後方直腸糞便與氣體充填的推擠。在光子治療中，若透過影像導引發現攝護腺被直腸氣體往前推歪，醫療團隊可透過調整治療床將病灶硬拉回照射計畫中心，即所謂的「<em class="term">硬橋</em>」。</p>
+
+        <div class="keybox danger">
+          <div class="keybox-title">絕對禁忌 · 粒子治療</div>
+          <p>硬橋只適用於光子，因光子對路徑場與穿透厚度敏感度低，干擾僅數個百分比；但<strong>粒子治療（質子、碳離子）絕對禁止使用硬橋</strong>，因粒子對路徑場與物質厚度極為敏感。</p>
+        </div>
+
+        <p>部分醫療中心（如台大醫院）採取更積極的侵入式控制 — 在直腸置入 <em class="term">Rectal Balloon</em>。這雖會強迫直腸前壁貼近攝護腺，但能固定直腸體積，使形變量與位移量大減。胡醫師補充：<strong>直腸被撐開後管壁張力變大、血管被壓扁，可能造成周邊正常組織短時間輕微缺血缺氧</strong>。在放射生物學上，正常組織若在照射時缺氧，其所受到的輻射傷害與副作用反而會減輕。</p>
+      </div>
+
+      <div class="case-card">
+        <div class="case-card-head">
+          <span class="case-tag">Cervical</span>
+          <h3 class="case-title">子宮頸癌 — 每日計畫選擇</h3>
+        </div>
+        <p>子宮在骨盆腔內擺動往往是 <strong>random 且幅度巨大</strong>。若當天影像顯示子宮甩得太厲害，通常會先放棄當天治療，祈禱隔天器官能轉回原位；若連續數日異常，則必須重新安排 CT 模擬並重做計畫（但需注意重做計畫的時間不可拖延太長，以免觸發腫瘤細胞增殖的 <em class="warn-term">repopulation</em> 效應）。</p>
+        <div class="keybox">
+          <div class="keybox-title">解方 · Plan-of-the-Day</div>
+          <p>初始做計畫時就預先做好 <strong>3 到 5 組</strong>針對不同子宮傾斜位置（前倒、後倒、中立...）的照射計畫，每天影像對位後看器官型態最像哪一組就套用哪一組。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 Breathing -->
+    <section class="section" id="breathing">
+      <div class="section-head">
+        <div class="section-num">Section 06 · Motion Management</div>
+        <h2 class="section-title">呼吸運動管理 — 從便宜到極端的五種手段</h2>
+        <div class="section-context">
+          <span class="ctx-tag">肺癌 · 肝癌</span>
+          <span class="ctx-tag">動態位移 2-3 cm</span>
+        </div>
+      </div>
+
+      <p class="lead">呼吸引發的器官運動主要影響肺下葉、橫隔膜下方的肝臟與胃部，動態位移有時高達 <strong>2-3 公分</strong>。若不採取任何管理手段而硬去包覆完整 ITV 範圍，將導致大量無辜正常組織吃足輻射劑量。</p>
+
+      <ol class="styled">
+        <li>
+          <strong>Abdominal Compression</strong> — 臨床最便宜且最受歡迎。外部物理施壓限制腹部起伏，將兩三公分位移硬壓到 <strong>0.5-1 cm</strong>。當呼吸幅度受限時，人體生理會自動以「提高呼吸頻率（變快）」維持正常氣體交換。
+        </li>
+        <li>
+          <strong>Respiratory Gating</strong> — 持續監測呼吸週期，唯有當肺部體積或腫瘤移動到預設視窗時才觸發射線發射。<em class="term">碳離子治療</em> 因精準度要求極端嚴苛而常搭配；光子治療雖也有此技術，但拉長每日治療時間，普遍較不受歡迎。
+        </li>
+        <li>
+          <strong>Real-time Tracking</strong> — 在腫瘤內部打入金屬標記（marker / fiducial），利用高頻 X-ray 偵測標記物位置（如 <em class="term">CyberKnife</em>），或連動治療床動態追著腫瘤跑。
+        </li>
+        <li>
+          <strong>DIBH / Active Breathing Control (ABC)</strong> — 利用 Hyperventilation 在短時間內連續深呼吸將體內 CO₂ 濃度洗到很低；即便是乳癌病人或未經訓練的正常人，在陸地上皆能輕鬆憋氣 <strong>1.5-2 分鐘</strong>。
+        </li>
+        <li>
+          <strong>High Frequency Oscillatory Ventilation (HFOV)</strong> — 目前最極端且具侵入性。先全身麻醉，連接特殊高頻震盪呼吸器（>300/min），在肺泡組織還來不及擴張與縮小前就完成換氣，創造心臟繼續跳動但雙肺完全靜止的奇特生理狀態。
+        </li>
+      </ol>
+
+      <div class="keybox danger">
+        <div class="keybox-title">⚠ 過度換氣憋氣法 · 嚴禁潛水</div>
+        <p>潛水時若過度換氣，可能會在體內 CO₂ 尚未高到觸發呼吸反射前，氧氣分壓就先降到昏迷臨界點，導致病人<strong>在水中直接失去意識而溺斃</strong>；但在治療床上昏倒只會重啟自動呼吸，相對安全。</p>
+      </div>
+
+      <div class="keybox violet">
+        <div class="keybox-title">Real-world Use · 中國甘肅武威重離子中心</div>
+        <p>運用 HFOV 在麻醉科密切配合下讓肺部完全靜止，<strong>一次將病人肺部多達 15-20 顆轉移瘤打完</strong>。</p>
+      </div>
+
+      <h3 class="sub" data-num="01">On-line Adaptive Radiotherapy (ART)</h3>
+      <p>病人躺在治療床上完成當日影像掃描後，若發現腫瘤位移或周邊器官形變，醫療團隊<strong>當天當場在床上自定義畫圖、馬上重新做 Planning</strong>、立刻線上 approve 並直接發射治療。</p>
+
+      <div class="keybox warn">
+        <div class="keybox-title">瓶頸 · 速度即一切</div>
+        <p>必須在床上幾分鐘內搞定，否則病人躺太久，中途直腸可能又產生新脹氣、膀胱尿液增加，導致位置再度跑掉，變成<strong>無解的惡性循環</strong>。此外面臨累積劑量加總的萬年難題 — Deformable Image Registration 傳統演算法效果普通，目前頂尖團隊正導入 AI 優化。</p>
+      </div>
+    </section>
+
+    <!-- 07 NPC -->
+    <section class="section" id="npc">
+      <div class="section-head">
+        <div class="section-num">Section 07 · NPC Contouring</div>
+        <h2 class="section-title">鼻咽癌實際案例 — Staging 盲點與 MR 判讀</h2>
+        <div class="section-context">
+          <span class="ctx-tag">2026-05-19</span>
+          <span class="ctx-tag">NPC Case Teaching</span>
+        </div>
+      </div>
+
+      <h3 class="sub" data-num="01">Clinical Staging 的特殊性</h3>
+
+      <div class="keybox">
+        <div class="keybox-title">Retropharyngeal Node · 不分側</div>
+        <p>放腫科繪圖習慣中，<em class="term">RP Node</em> 通常直接併入 GTV_T，因為傳統影像與解剖預後上，RP Node 轉移與原發腫瘤往旁的 parapharyngeal extension 難以明確切分。</p>
+      </div>
+
+      <div class="case-card">
+        <div class="case-card-head">
+          <span class="case-tag">Staging Pitfall</span>
+          <h3 class="case-title">影像科報告 N2 → 應為 N1</h3>
+        </div>
+        <p>影像科報告描述「left RP Node 有問題，right neck level 2 淋巴結有問題」，據此給予 N2 分期。</p>
+        <p>吳醫師指出這是跨團隊會議疏忽：<strong>根據 AJCC 鼻咽癌分期規範，RP Node 在分期定義中不具 lateralization</strong>。不論病人 RP Node 是單側還是雙側，只要合併的僅是單側頸部淋巴結轉移（如本案右側 Level 2），分期上依然只能歸類為 <strong>N1</strong>。必須兩側頸部皆有淋巴結轉移才能判定為 N2。</p>
+      </div>
+
+      <h3 class="sub" data-num="02">MR 影像判讀技巧</h3>
+
+      <div class="seq-grid">
+        <div class="seq-card">
+          <span class="seq-card-tag">T1 + C + FS</span>
+          <h5>Primary Tumor 主力</h5>
+          <p>健康骨頭因 fat suppression 而呈黑色，Enhanced tumor 則呈白色，<strong>對比強烈</strong></p>
+        </div>
+        <div class="seq-card">
+          <span class="seq-card-tag">T1 (w/o C)</span>
+          <h5>骨侵犯偵測</h5>
+          <p>正常骨頭骨髓呈非常明亮白色；若交叉比對發現原本明亮的訊號變黑且顯影，代表 <strong>Skull base bone invasion (≥ T3)</strong></p>
+        </div>
+        <div class="seq-card">
+          <span class="seq-card-tag">T2</span>
+          <h5>細微 LN 判讀</h5>
+          <p>血管在 T1+C 可能流速偽影；T2 下血管一路黑、肌肉偏黑、真正轉移 LN 呈均勻「灰色」</p>
+        </div>
+      </div>
+
+      <h4 class="sub-sub">化療前後比對 · 寧可錯殺原則</h4>
+      <p>該個案腫瘤原發於 posterior choana 附近，曾嚴重擠壓耳咽管開口導致中耳積水，一開始大得像顆擋路的石頭。接受數輪 <em class="term">Induction Chemotherapy</em> 後，最新影像顯示已顯著消退，兩側鼻咽腔幾近對稱。</p>
+
+      <div class="keybox warn">
+        <div class="keybox-title">原則 · 寧可錯殺，不要放過</div>
+        <p>面對化療後肉眼病灶幾乎消失的個案，放腫科秉持「寧可錯殺」原則 — 因為醫師清楚知道腫瘤最初的「殘骸與遺跡」落在哪裡。對於懷疑有 <em class="term">Multi-focus</em> 的鼻腔與鼻咽區域，會毫不手軟地給予基本劑量包覆，以最大程度降低局部復發風險。</p>
+      </div>
+
+      <div class="keybox danger">
+        <div class="keybox-title">Artifact Warning</div>
+        <p>上排牙齒若有金屬植入物（植牙、假牙）會造成<strong>極為嚴重的磁場扭曲</strong>，T1+C 畫面便產生「黑洞、力場扭曲」般的空洞（by 胡醫師）。</p>
+      </div>
+
+      <h4 class="sub-sub">MRI 與 CT 融合的脖子角度限制</h4>
+      <p>病人 CT 定位時被強制要求<strong>仰頭</strong>（將視神經與眼球拉到水平方向、遠離鼻咽高劑量區）；而 MRI 通常只是放鬆平躺，脖子角度相對較低。導致兩套影像脖子角度完全不對稱 — 頭部對得越準，脖子就越歪，<strong>三維空間中不可能同時精確對準</strong>。實務妥協：優先以頭部病灶為主對位，脖子部分由放腫醫師隨後在 CT 上手動修正。</p>
+
+      <h3 class="sub" data-num="03">時代的眼淚 · 2D 放療 vs IMRT</h3>
+      <div class="compare">
+        <div class="compare-card old">
+          <h5>2D 放療時代</h5>
+          <p>定位僅仰賴正、側兩張平面 X 光片。熟練的放腫醫師憑藉解剖學的極致理解，在兩張 X 光片上進行高度「腦補」，直接勾勒出照野，<strong>僅需 10 分鐘</strong>就能畫完一個鼻咽癌個案。</p>
+        </div>
+        <div class="compare-card new">
+          <h5>3D / IMRT / VMAT 時代</h5>
+          <p>CT、MRI 逐層精細融合，正常組織輻射副作用急劇降低，但臨床醫師必須在電腦前耗費數倍甚至數小時逐層精雕細琢，<strong>有時花了大半天連半個 NPC 都還沒畫完</strong>。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 Neck -->
+    <section class="section" id="neck">
+      <div class="section-head">
+        <div class="section-num">Section 08 · 05-20 課堂</div>
+        <h2 class="section-title">頸部淋巴結分區 — 解剖與引流的動態觀</h2>
+        <div class="section-context">
+          <span class="ctx-tag">2026-05-20</span>
+          <span class="ctx-tag">胡育文 醫師</span>
+        </div>
+      </div>
+
+      <figure class="solo">
+        <img src="assets/contouring_brain_oar.png" alt="腦部 contouring 示意">
+        <figcaption>實際 contouring 工作畫面：腦部 OAR 與 target 之色彩編碼勾畫（取自吳醫師現場教學）</figcaption>
+      </figure>
+
+      <h3 class="sub" data-num="01">Level 1-6 分區邊界</h3>
+
+      <ul class="styled">
+        <li><strong>Level 1A (Submental)</strong>：下巴前方正中央</li>
+        <li><strong>Level 1B (Submandibular)</strong>：兩側圍繞下頜下腺</li>
+        <li><strong>Level 2-4</strong>：SCM 覆蓋的骨幹區域，傳統以舌骨與環狀軟骨下緣作為上下切線</li>
+        <li><strong>Level 5</strong>：頸後三角，SCM 後緣之後未被肌肉覆蓋的區域</li>
+        <li><strong>Level 7</strong>：定義爭議，各流派文獻歧異甚大，引用必須註明出處</li>
+      </ul>
+
+      <div class="keybox">
+        <div class="keybox-title">NPC vs 其他頭頸癌</div>
+        <p>口腔癌等頭頸癌通常不常規照射 Level 5；但 <strong>NPC 極易向後侵犯至 Level 5</strong>，因此必須常規包覆。</p>
+      </div>
+
+      <div class="keybox violet">
+        <div class="keybox-title">精妙臨床觀察 · 引流的動態性</div>
+        <p>NPC 病患在接受 2、3、4 區放療<strong>半年至一年後，原本微小的 Level 1A 和 1B 淋巴結往往會代償性變大</strong>。這是因為主淋巴通路受放療影響引流不順，淋巴液被迫改走 1A 這些原本流量小的「替代道路」所致。<em>人體解剖與生理引流是動態的，不能只死背靜態影像。</em></p>
+      </div>
+
+      <h3 class="sub" data-num="02">唾液腺保護 — 2D 對比 IMRT</h3>
+
+      <div class="compare">
+        <div class="compare-card old">
+          <h5>2D 時代</h5>
+          <p>為讓中央 NPC 腫瘤與兩側 LN 得到足夠劑量，<strong>整條唾液腺暴露在 >7000 cGy 高劑量夾攻</strong>下，老一輩病人治完後終生深受 Xerostomia 所苦。</p>
+        </div>
+        <div class="compare-card new">
+          <h5>IMRT 時代</h5>
+          <p>精準腮腺與下頜下腺包覆與劑量 Sparing，甚至限制整個口腔的平均劑量。看著影像上精準的劑量線，<strong>在殺死腫瘤的同時守護病人的生活品質</strong>。</p>
+        </div>
+      </div>
+
+      <h3 class="sub" data-num="03">骨侵犯的兩種影像模式</h3>
+
+      <div class="compare">
+        <div class="compare-card old">
+          <h5>Osteolytic Lesion</h5>
+          <p>腫瘤活化食骨細胞，直接把骨頭「咬掉一塊」</p>
+          <p>CT：骨質缺損</p>
+          <p>T1 contrast：健康白訊號整片黑掉</p>
+          <p><strong>NPC 個案以此類表現較多</strong></p>
+        </div>
+        <div class="compare-card new">
+          <h5>Osteoblastic Lesion</h5>
+          <p>骨頭受腫瘤刺激，成骨細胞瘋狂反應抵消</p>
+          <p>影像：白白密密麻麻一片</p>
+          <p>治療後極短時間內看到大片骨頭變白，通常代表治療前就已是 osteoblastic（osteolytic 後骨頭修補速度沒那麼快）</p>
+        </div>
+      </div>
+
+      <h3 class="sub" data-num="04">顱底解剖 · NPC 入侵孔洞</h3>
+
+      <div class="foramen-grid">
+        <div class="foramen-item">
+          <div class="latin">Foramen ovale</div>
+          <div class="desc">通過 <strong>三叉神經第三支</strong>。NPC 非常容易沿此洞向上鑽入顱內，受犯時引發廣泛性頭痛與面部疼痛。影像上需仔細比對兩側孔洞對稱性。</div>
+        </div>
+        <div class="foramen-item">
+          <div class="latin">Foramen spinosum</div>
+          <div class="desc">位於卵圓孔旁，通過中腦膜動脈。</div>
+        </div>
+        <div class="foramen-item">
+          <div class="latin">Foramen lacerum</div>
+          <div class="desc">位於頸動脈管附近，呈三角形，表面有軟骨覆蓋，是<strong>顱底骨質相對薄弱的 Potential weak point</strong>。NPC 經常從這個縫隙防線攻入顱內，因此 CTV 通常需要常規包裹。</div>
+        </div>
+        <div class="foramen-item">
+          <div class="latin">Foramen rotundum</div>
+          <div class="desc">通過 <strong>三叉神經第二支</strong>，與三叉神經節侵犯症狀連動。</div>
+        </div>
+        <div class="foramen-item">
+          <div class="latin">Hypoglossal canal & Jugular foramen</div>
+          <div class="desc">兩者緊鄰。舌下神經管通過舌下神經，頸靜脈孔則通過 <strong>CN IX, X, XI</strong>。若 NPC 長到此處或放療後 Fibrosis 與缺氧，可能導致遲發性舌下神經受損 — 伸舌頭時偏向肌肉萎縮或麻痺的那一側。</div>
+        </div>
+      </div>
+
+      <h3 class="sub" data-num="05">影像對位與 AI 勾畫現況</h3>
+      <p>影像對位技術從早期手動 Point-to-Point，演進到如今最常用的 <em class="term">Rigid Auto-Registration</em>。自動對位非常仰賴 Initial value 與 Bounding box 設定 — 本質是優化求解問題，<strong>若初始偏差太大，系統會卡在區域錯誤的死胡同裡</strong>。對位完成後，要利用滾輪切換三個切面，以內耳、耳蝸、視交叉、海綿竇等微細結構的對齊度，作為達到「90 分以上」的關鍵指標。</p>
+
+      <div class="keybox warn">
+        <div class="keybox-title">AI 限制 · CT vs MR</div>
+        <p>院內主流系統多以 CT 影像為基礎訓練。對 OAR（腦幹、腮腺）或影像對比明顯的腦轉移病灶表現不錯；但面對<strong>高度依賴 MR 才能看清的微細神經構造</strong>（視神經、視交叉、三叉神經），因 AI 沒學過 MR 資料，在 CT 上常流於「盲猜」或「亂畫」（如將眼外肌誤認，或視交叉畫得過大或位置不對）。</p>
+      </div>
+    </section>
+
+    <!-- 09 LQ Model -->
+    <section class="section" id="lq">
+      <div class="section-head">
+        <div class="section-num">Section 09 · 05-21 課堂</div>
+        <h2 class="section-title">LQ Model 與 SIB — 劑量數學的臨床轉換</h2>
+        <div class="section-context">
+          <span class="ctx-tag">2026-05-21</span>
+          <span class="ctx-tag">胡育文 醫師</span>
+        </div>
+      </div>
+
+      <h3 class="sub" data-num="01">Linear-Quadratic Model</h3>
+
+      <div class="equation">
+        <span class="eq-label">Single Dose · Survival Fraction</span>
+        ln(SF) = α · D + β · D²
+      </div>
+      <div class="equation">
+        <span class="eq-label">N Fractions · Cumulative Effect</span>
+        Effect = n · (α · d + β · d²)
+      </div>
+
+      <p>臨床常兩邊同除以 β，利用 <em class="term">α/β ratio</em>（組織特定常數，腫瘤或正常組織的耐受度）來進行不同分次劑量的等效轉換。</p>
+
+      <h4 class="sub-sub">臨床劑量轉換實例</h4>
+
+      <ol class="styled">
+        <li><strong>傳統 Sequential</strong>：總劑量 70 Gy / 35 次 / 單次 2 Gy</li>
+        <li><strong>新式排程</strong>：縮短為 33 次。維持完全相同生物等效效應，LQ model 解出單次劑量約需 <strong>2.1 Gy</strong>（33 × 2.1 = 69.3 Gy）</li>
+        <li><strong>臨床湊整實務</strong>：為避免其他科室誤解，仍會直接將 Primary tumor 湊滿 70 Gy。目前放療技術提升，多補這點劑量對正常組織副作用並無顯著增加</li>
+      </ol>
+
+      <h3 class="sub" data-num="02">SIB · Simultaneous Infield Boost</h3>
+      <p>美國又稱 <em class="term">"Paint"</em>。傳統 Sequential 是先照大範圍、再縮小範圍分段執行（前 25 次大範圍，後續逐步縮小）。SIB 則是<strong>「大、中、小範圍在同一個治療計畫、同一個工作天內一起執行」</strong>。</p>
+
+      <h4 class="sub-sub">33 次排程內的劑量分層</h4>
+      <table class="sib-table">
+        <thead><tr><th>Risk Tier</th><th>Volume</th><th>單次劑量</th><th>總劑量</th></tr></thead>
+        <tbody>
+          <tr><td class="risk-high">High Risk</td><td>GTV / CTV-H</td><td class="dose">2.12 Gy</td><td class="dose">70 Gy</td></tr>
+          <tr><td class="risk-mid">Intermediate</td><td>CTV-M</td><td class="dose">1.8 Gy</td><td class="dose">59.4 Gy</td></tr>
+          <tr><td class="risk-low">Low Risk</td><td>CTV-L</td><td class="dose">1.6 Gy</td><td class="dose">52.8 Gy</td></tr>
+        </tbody>
+      </table>
+
+      <h4 class="sub-sub">SIB 的四大臨床優勢</h4>
+      <ol class="styled">
+        <li><strong>保護正常組織</strong>：分開多個計畫做，疊加後邊緣容易爆掉；SIB 整體劑量分布更精緻漂亮</li>
+        <li><strong>契合電腦優化演算法</strong>：在逆向計畫（IMRT）中，電腦對 SIB 這種有劑量梯度差的疊加計畫，跑出來最順、最優化</li>
+        <li><strong>無縫 Adaptive RT</strong>：同一天給予高低劑量，切換新舊計畫時具高度彈性</li>
+        <li><strong>簡化物理師工作量</strong>：減少需要製作的計畫總套數</li>
+      </ol>
+
+      <h3 class="sub" data-num="03">FDG-PET 的局限性</h3>
+      <p>FDG-PET 本質利用葡萄糖代謝率偵測，因此下列情況容易出現 <em class="warn-term">False Negative</em>：</p>
+
+      <ol class="styled">
+        <li><strong>分化良好 / 生長緩慢腫瘤</strong>：如 Low-grade prostatic cancer、Low-grade Sarcoma — 代謝接近正常細胞，可能不亮</li>
+        <li><strong>腦部腫瘤（如 GBM）</strong>：並非腦瘤不吃葡萄糖，而是<strong>腦部正常背景訊號本身就極度旺盛非常亮</strong>，導致病灶對比度不足</li>
+      </ol>
+
+      <figure class="solo">
+        <img src="assets/with_dr_hu_final_day.jpeg" alt="最後一天與胡育文醫師的合照">
+        <figcaption>最後一天與胡育文醫師的合照</figcaption>
+      </figure>
+    </section>
+
+    <!-- 10 Gamma Knife -->
+    <section class="section" id="gamma">
+      <div class="section-head">
+        <div class="section-num">Section 10 · Gamma Knife</div>
+        <h2 class="section-title">Gamma Knife — 劑量梯度的藝術</h2>
+        <div class="section-context">
+          <span class="ctx-tag">2026-05-20</span>
+          <span class="ctx-tag">蕭正英 主任</span>
+        </div>
+      </div>
+
+      <p class="lead">瑞典神經外科醫師 <strong>Leksell</strong> 對立體定位手術觀念的跨界延伸 — 將實體針頭替換成放射線，從多個角度射入並在中心交會，便能創造出威力強大的「<em class="term">交叉火網</em>」。</p>
+
+      <div class="img-row cols-2">
+        <figure><img src="assets/gamma_planning_1.png" alt="Gamma Knife planning"><figcaption>Gamma Knife 治療計畫畫面：多 shot 與劑量等高線的逐層調整</figcaption></figure>
+        <figure><img src="assets/gamma_planning_2.png" alt="Gamma Knife planning multi-slice"><figcaption>多發性 Brain Mets 一日一次完成的多病灶 planning</figcaption></figure>
+      </div>
+
+      <h3 class="sub" data-num="01">物理演進與 Co-60 集束</h3>
+
+      <div class="callouts">
+        <div class="callout">
+          <div class="callout-num">8</div>
+          <div class="callout-label">Sectors</div>
+        </div>
+        <div class="callout">
+          <div class="callout-num warm">192</div>
+          <div class="callout-label">Co-60 Sources</div>
+        </div>
+        <div class="callout">
+          <div class="callout-num">100:2</div>
+          <div class="callout-label">Center : Periphery</div>
+          <div class="callout-desc">外圍劑量稀釋至約 1/50</div>
+        </div>
+      </div>
+
+      <p>傳統放療中，放射線進入人體表層時劑量最高，隨後慢速下降，導致深部腫瘤尚未得到足夠能量前，表層正常組織早已過度曝露。Leksell 的創舉：透過三個角度交叉，各路射束便僅需分擔三分之一的劑量；現今系統利用核反應爐製造的 <em class="term">Co-60</em> 作為放射源，劃分為 8 個 Sectors、總計部署 192 顆。<strong>100 多條射束全面向中心聚焦時，中心腫瘤劑量瞬間堆疊放大，外圍承受的單一劑量則大幅稀釋。</strong></p>
+
+      <h3 class="sub" data-num="02">陡峭劑量梯度的腫瘤體積上限</h3>
+
+      <div class="keybox warn">
+        <div class="keybox-title">物理鐵律 · 3-3.5 cm</div>
+        <p>Gamma Knife 之所以能在臨床上有效降低 Complication，核心關鍵就在於擁有一條極為「陡峭的劑量梯度」。但腫瘤體積過大時，<em class="term">Divergent</em> 射束會使邊緣的劑量梯度變差，原先陡峭的高峰開始下降、邊緣模糊。<strong>腫瘤大小原則上不能超過 3 到 3.5 公分</strong>，否則劑量梯度的優勢將蕩然無存。</p>
+      </div>
+
+      <h3 class="sub" data-num="03">三大黃金評估指標</h3>
+
+      <div class="seq-grid">
+        <div class="seq-card">
+          <span class="seq-card-tag">Coverage</span>
+          <h5>≥ 99%</h5>
+          <p>處方劑量等高線（黃色區域）成功包覆腫瘤範圍的比例。對於良性腫瘤<strong>不盲目追求 100%</strong>，與惡性 CTV 追求 100% 的思維截然不同</p>
+        </div>
+        <div class="seq-card">
+          <span class="seq-card-tag">Selectivity</span>
+          <h5>Conformity Index</h5>
+          <p>若為 0.76，意味黃色區域中 76% 屬於 Target，24% 為誤照正常組織。<strong>越接近 1 越完美</strong>，但受腫瘤異質性限制難達絕對 1</p>
+        </div>
+        <div class="seq-card">
+          <span class="seq-card-tag">Gradient</span>
+          <h5>越小越好</h5>
+          <p>量化劑量向外跌落的速度，如同懸崖的斜率。<strong>優化調校降至 2.5 屬極佳</strong></p>
+        </div>
+      </div>
+
+      <h3 class="sub" data-num="04">堆樂高 · 權重優化藝術</h3>
+
+      <p>Gamma Knife 配有不同直徑的準直器（16mm、8mm、4mm）：</p>
+
+      <ul class="styled">
+        <li><strong>大尺寸</strong>：一次涵蓋大範圍、大幅節省治療時間，但邊緣粗糙</li>
+        <li><strong>小尺寸（4mm）</strong>：像畫筆般極其精細地貼合腫瘤崎嶇邊緣</li>
+      </ul>
+
+      <p>這個過程就如同「<em class="term">堆樂高</em>」一般，醫師必須思考如何最有效率地運用不同大小的積木，去完美拼湊出腫瘤的立體形狀。</p>
+
+      <div class="keybox violet">
+        <div class="keybox-title">微調的拉鋸藝術</div>
+        <p>為消弭 Hot spot 並避開周邊正常組織，醫師必須不斷調整每個 Shot 的三維座標（XYZ 軸），或精準「拼掉」那些有一半越界照到正常組織的無效射束。透過調整射束權重（W）— 改變每個點給予的放射劑量比重 — 能有效將多餘劑量從邊緣移開（例如將梯度值從 <strong>2.96 成功壓低至 2.71</strong>）。這是一門牽一髮動全身的拉鋸藝術，任意調動一個點的權重都會引發全局 Normalization，<strong>稍有不慎便會在其他區域意外引發新的 Hot spot</strong>。</p>
+      </div>
+
+      <h3 class="sub" data-num="05">伽瑪刀的核心臨床價值</h3>
+
+      <div class="compare">
+        <div class="compare-card old">
+          <h5>傳統 Whole Brain RT</h5>
+          <p>動輒需要兩個禮拜，病患必須反覆往返醫院煎熬</p>
+          <p>對 Cognitive function 損傷較大</p>
+        </div>
+        <div class="compare-card new">
+          <h5>Gamma Knife SRS</h5>
+          <p><strong>一天（單次）即可完成</strong>的手術</p>
+          <p>核心初衷並非單純延長存活時間，而是<strong>讓正常腦組織散射劑量降到最低</strong>，將對 Cognitive function 的損傷減至最少</p>
+          <p>無論良性腦瘤或多發性 Brain mets 皆適用</p>
+        </div>
+      </div>
+
+      <p class="lead" style="margin-top: 3rem; text-align: center; font-style: italic; color: var(--accent);">「在當代神經醫學中，Gamma Knife 扮演了捍衛患者生活品質與大腦功能的關鍵要角。」</p>
+    </section>
+
+    <!-- 11 結業合影 -->
+    <section class="section" id="closing">
+      <div class="section-head">
+        <div class="section-num">Section 11 · Closing</div>
+        <h2 class="section-title">結業合影</h2>
+        <div class="section-context">
+          <span class="ctx-tag">2026-05-21</span>
+          <span class="ctx-tag">陽明醫學系</span>
+        </div>
+      </div>
+
+      <figure class="solo">
+        <img src="assets/with_yangming_classmates.jpeg" alt="跟陽明醫學系的同學一起實習最後一天的紀念合照">
+        <figcaption>跟陽明醫學系的同學一起實習最後一天的紀念合照</figcaption>
+      </figure>
+    </section>
+
+  </main>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="footer-tag">END OF RECORD</div>
+  <p>本文件由楊宗諺撰寫之臨床學習紀錄整理而成</p>
+  <p>臺北榮民總醫院 · 重粒子及放射腫瘤部 · 2026 年 5 月</p>
+</footer>
+
+<script>
+// TOC active highlight + fade-in
+const sections = document.querySelectorAll('.section');
+const tocLinks = document.querySelectorAll('.toc-list a');
+
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.05 });
+sections.forEach(s => io.observe(s));
+
+const activeIo = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && e.intersectionRatio > 0.15) {
+      const id = e.target.id;
+      tocLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { threshold: [0.15, 0.5] });
+sections.forEach(s => activeIo.observe(s));
+</script>
+</body>
+</html>
